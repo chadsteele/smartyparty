@@ -1,0 +1,22 @@
+{
+	"name": "smartyparty",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"start": "vite"
+	},
+	"dependencies": {
+		"@suid/icons-material": "*",
+		"@suid/material": "*",
+		"netlify": "^13.1.11",
+		"openai": "^4.20.1",
+		"solid-js": "*"
+	},
+	"devDependencies": {
+		"@suid/vite-plugin": "*",
+		"typescript": "^4.8.2",
+		"vite": "*",
+		"vite-plugin-solid": "*"
+	}
+}
