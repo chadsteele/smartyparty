@@ -7,11 +7,13 @@
 		"start": "vite"
 	},
 	"dependencies": {
+		"@solid-primitives/keyboard": "^1.2.8",
 		"@suid/icons-material": "*",
 		"@suid/material": "*",
 		"netlify": "^13.1.11",
 		"openai": "^4.20.1",
-		"solid-js": "*"
+		"solid-js": "*",
+		"solid-transition-group": "^0.2.3"
 	},
 	"devDependencies": {
 		"@suid/vite-plugin": "*",

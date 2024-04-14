@@ -125,28 +125,16 @@ export default function () {
 
 				<Show when={!listening()}>
 					<Alert severity="info" sx={{ marginBottom: 2 }}>
-						<h2>About Dr.smartyparty</h2>
-						This app will help you have more effective conversations with doctors, lawyers, friends, etc.
-						<ul>
-							<li>First, ask permission to use the app in the conversation.  Don't be creepy.</li>
-							<li>Next, hit [start] and I will listen, summarize, answer questions
-								and suggest questions during your conversation.</li>
-							<li>Ask your doctor (whomever) the questions I suggest</li>
-							<li>Repeat</li>
-							<li>Have fun!</li>
-
-						</ul>
-						Also, Don't worry.  Nothing is recorded and your privacy is assured.
-
-						<p>Enter your personal api key or the one provided by your administrator</p>
-
-						<TextField
-							label="Open Ai API Key"
-							variant="outlined"
-							fullWidth
-							value={apiKey()}
-							onChange={event => setApiKey(event.currentTarget.value)}
-						/>
+						Enter your personal api key or the one provided by your administrator
+						<p>
+							<TextField
+								label="Open Ai API Key"
+								variant="outlined"
+								fullWidth
+								value={apiKey()}
+								onChange={event => setApiKey(event.currentTarget.value)}
+							/>
+						</p>
 					</Alert>
 				</Show>
 				<Box margin={1}>
