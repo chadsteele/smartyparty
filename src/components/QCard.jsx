@@ -17,18 +17,22 @@ import { Transition } from "solid-transition-group"
 import "./QCard.css"
 
 export default function (params) {
-    if (!params.qa) return ''
-    params.qa.correct ||= 0  // init
+    console.log(params)
+
+    if (!params.qa) return <></>
+    params.qa.correct = params.qa.correct || 0  // init
 
     const [hint, setHint] = createSignal("")
     const [answer, setAnswer] = createSignal("")
     const [css, setCss] = createSignal("")
 
     onMount(() => {
+        console.log('onmount')
         setCss("fade-in slide-in-left")
     })
 
     onCleanup(() => {
+        console.log('onCleanup')
         setCss("fade-out slide-out-right")
     })
 
@@ -46,12 +50,10 @@ export default function (params) {
         return <>
             <IconButton disabled ><MicIcon /></IconButton>
             <IconButton onClick={onEnter} ><KeyboardReturnIcon /></IconButton>
-
         </>
     }
 
     function onMiss () {
-
         params.qa.correct = -2 // miss once, you have to get it right 3x to learn it
         let temp = params.qa.a
         if (!temp) return
@@ -67,52 +69,50 @@ export default function (params) {
     }
 
     return <>
-        <Container>
-            <Box sx={{ maxWidth: "50em", marginTop: "1em" }}>
-                <Card class={css()}>
-                    <CardContent>
-                        <div class="question">
-                            {params.qa.q}
-                        </div>
 
-                        <TextField
-                            label="your answer"
-                            variant="outlined"
-                            fullWidth
-                            InputProps={{ endAdornment: <TextButtons /> }}
-                            value={answer()}
+        <Card class={css()}>
+            <CardContent>
+                <div class="question">
+                    {params.qa.q}
+                </div>
 
-                            onChange={(event, value) => {
-                                setAnswer(value)
-                            }}
+                <TextField
+                    label="your answer"
+                    variant="outlined"
+                    fullWidth
+                    InputProps={{ endAdornment: <TextButtons /> }}
+                    value={answer()}
 
-                            onKeyDown={(event) => {
-                                if (event.key == 'Enter') {
-                                    if (event.shiftKey) {
-                                        setAnswer(params.qa.a)
-                                    }
-                                    onEnter()
-                                }
+                    onChange={(event, value) => {
+                        setAnswer(value)
+                    }}
 
-                            }}
-                            autoComplete="off"
-                        />
-                        <Show when={hint() && answer() != params.qa.a} >
-                            <Alert severity="error" sx={{ marginTop: '1em' }}>
-                                Hint: &nbsp;  <strong>{hint()}</strong>
-                            </Alert>
-                        </Show>
+                    onKeyDown={(event) => {
+                        if (event.key == 'Enter') {
+                            if (event.shiftKey) {
+                                setAnswer(params.qa.a)
+                            }
+                            onEnter()
+                        }
 
-                        <Show when={params.qa.correct < 0}>
-                            <Stack direction="row" justifyContent="end" sx={{ fontSize: '0.8em', color: 'grey' }}>
-                                Retries required {1 - params.qa.correct}
-                            </Stack>
-                        </Show>
+                    }}
+                    autoComplete="off"
+                />
+                <Show when={hint() && answer() != params.qa.a} >
+                    <Alert severity="error" sx={{ marginTop: '1em' }}>
+                        Hint: &nbsp;  <strong>{hint()}</strong>
+                    </Alert>
+                </Show>
 
-                    </CardContent>
-                </Card>
-            </Box>
-        </Container >
+                <Show when={params.qa.correct < 0}>
+                    <Stack direction="row" justifyContent="end" sx={{ fontSize: '0.8em', color: 'grey' }}>
+                        Retries required {1 - params.qa.correct}
+                    </Stack>
+                </Show>
+
+            </CardContent>
+        </Card>
+
     </>
 }
 
