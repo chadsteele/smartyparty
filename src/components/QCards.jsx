@@ -1,5 +1,6 @@
 import QCard from "./QCard.jsx"
 import config from "./config.js"
+import { createStore } from "solid-js/store";
 import { Show, createSignal, onMount, createEffect } from "solid-js"
 import {
     Alert,
@@ -10,37 +11,44 @@ import {
     Container,
     TextField,
     Typography,
-    Stack, IconButton, Slide, Box
+    Stack, IconButton, Slide, Box, Grow, LinearProgress
 } from "@suid/material"
 
-export default function () {
 
-    const cards = [...config.QA]
-    const [card, setCard] = createSignal("")
-    console.log({ card: card(), cards })
+import "./QCard.css"
+
+export default function (params) {
+    const originalCards = (params.QA || config.QA).map((item) => { item.correct = 0; return item })
+    const [cards, setCards] = createSignal(originalCards)
+    const [index, setIndex] = createSignal(0)
+    const [progress, setProgress] = createSignal(0)
 
     function next () {
-        const old = card()
-        let i = 0, newCard = card()
+        setCards(cards().filter((card) => card.correct < 1))
+        setIndex(Math.floor(Math.random() * cards().length))
+        setProgress(100 * (originalCards.length - cards().length) / originalCards.length)
 
-        while (old?.q == newCard?.q || newCard?.correct == 1) {
-            i = Math.floor(Math.random() * cards.length)
-            newCard = cards[i]
-        }
-        console.log({ i, newCard, cards })
-        setCard(<QCard qa={newCard} next={next} />)
+        console.log({ cards: cards(), index: index() })
     }
 
+    onMount(() => {
+        next()
+    })
 
     return <>
-        <Container>
-
-            {/* <QCard qa={cards[0]} next={next} /> */}
-
-            <For each={cards}>{(c, i) =>
-                <QCard qa={c} next={next} />
-            }</For>
-
+        <LinearProgress variant="determinate" value={progress()} />
+        <Container >
+            <Show when={cards().length}>
+                <Box sx={{ width: "100%", position: "relative" }}>
+                    <For each={cards()} fallback={<div>Loading...</div>}>{(item, i) =>
+                        <Grow in={i() == index()}>
+                            <QCard qa={item} next={next} focus={i() == index()} />
+                        </Grow>
+                    }</For>
+                </Box>
+            </Show>
         </Container>
     </>
 }
+
+

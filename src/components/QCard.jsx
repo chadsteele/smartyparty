@@ -12,37 +12,41 @@ import {
 import { Show, createSignal, onMount, createEffect, onCleanup } from "solid-js"
 import KeyboardReturnIcon from '@suid/icons-material/KeyboardReturn';
 import MicIcon from '@suid/icons-material/Mic';
-import { Transition } from "solid-transition-group"
 
 import "./QCard.css"
 
-export default function (params) {
-    console.log(params)
+export default function (props) {
 
-    if (!params.qa) return <></>
-    params.qa.correct = params.qa.correct || 0  // init
+    if (!props.qa) return <>Missing params!</>
 
     const [hint, setHint] = createSignal("")
     const [answer, setAnswer] = createSignal("")
-    const [css, setCss] = createSignal("")
+    const [message, setMessage] = createSignal("")
+    let ref
+
 
     onMount(() => {
-        console.log('onmount')
-        setCss("fade-in slide-in-left")
+        props.qa.correct = 0
     })
 
-    onCleanup(() => {
-        console.log('onCleanup')
-        setCss("fade-out slide-out-right")
+    createEffect(() => {
+        setMessage(props.message || props.qa.message || "")
+        if (props.focus) {
+            setTimeout(() => { ref.focus() }, 0)
+            setAnswer("")
+            setHint("")
+        }
     })
-
 
     function onEnter () {
-        if (params.qa.a.trim() != answer().trim()) {
+
+        if (props.qa?.a?.trim() != answer().trim()) {
             onMiss()
         } else {
-            params.qa.correct++
-            params.next()
+            ++props.qa.correct;
+            setAnswer("")
+            setHint("")
+            props.next()
         }
     }
 
@@ -54,26 +58,25 @@ export default function (params) {
     }
 
     function onMiss () {
-        params.qa.correct = -2 // miss once, you have to get it right 3x to learn it
-        let temp = params.qa.a
+        props.qa.correct = -2 // miss once, you have to get it right 3x to learn it
+        let temp = props.qa.a
         if (!temp) return
 
-        if (hint().length >= params.qa.a.length) {
+        if (hint().length >= props.qa.a.length) {
             temp = getHint(temp)
         } else {
             // replace all letters with underscores
-            temp = params.qa.a.replaceAll(/\w/g, '•')
+            temp = props.qa.a.replaceAll(/\w/g, '•')
         }
-
         setHint(temp)
     }
 
     return <>
 
-        <Card class={css()}>
+        <Card class="card" >
             <CardContent>
                 <div class="question">
-                    {params.qa.q}
+                    {props.qa.q}
                 </div>
 
                 <TextField
@@ -82,6 +85,7 @@ export default function (params) {
                     fullWidth
                     InputProps={{ endAdornment: <TextButtons /> }}
                     value={answer()}
+                    inputRef={input => { ref = input }}
 
                     onChange={(event, value) => {
                         setAnswer(value)
@@ -90,7 +94,7 @@ export default function (params) {
                     onKeyDown={(event) => {
                         if (event.key == 'Enter') {
                             if (event.shiftKey) {
-                                setAnswer(params.qa.a)
+                                setAnswer(props.qa.a)
                             }
                             onEnter()
                         }
@@ -98,20 +102,26 @@ export default function (params) {
                     }}
                     autoComplete="off"
                 />
-                <Show when={hint() && answer() != params.qa.a} >
+                <Show when={hint() && answer() != props.qa.a} >
                     <Alert severity="error" sx={{ marginTop: '1em' }}>
                         Hint: &nbsp;  <strong>{hint()}</strong>
                     </Alert>
                 </Show>
 
-                <Show when={params.qa.correct < 0}>
+                <Show when={answer() == props.qa.a} >
+                    <Alert severity="success" sx={{ marginTop: '1em' }}>
+                        Correct!
+                    </Alert>
+                </Show>
+
+                <Show when={message()}>
                     <Stack direction="row" justifyContent="end" sx={{ fontSize: '0.8em', color: 'grey' }}>
-                        Retries required {1 - params.qa.correct}
+                        {message()}
                     </Stack>
                 </Show>
 
             </CardContent>
-        </Card>
+        </Card >
 
     </>
 }
