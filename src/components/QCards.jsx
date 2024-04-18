@@ -25,7 +25,8 @@ export default function (params) {
 
     function next () {
         setCards(cards().filter((card) => card.correct < 1))
-        setIndex(Math.floor(Math.random() * cards().length))
+        const temp = Math.floor(Math.random() * cards().length)
+        setIndex()
         setProgress(100 * (originalCards.length - cards().length) / originalCards.length)
 
         console.log({ cards: cards(), index: index() })

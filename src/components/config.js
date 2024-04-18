@@ -11,8 +11,31 @@ export default {
 	{ "title":"", "summary":"", "emoji":"", "questions":[""]}
 	`,
 
-	// Create a list of 10 questions and answers about "How Maslows hiearchy of needs applies to donald trump and his supporters" in strict json format [{q,a}].  Answers should be 3 words or less.
 	QA: [
+		{
+			q: "What is the atomic number of carbon?",
+			a: "6",
+		},
+		{
+			q: "What is the formula for water?",
+			a: "H2O",
+		},
+		{
+			q: "What type of bond shares electrons?",
+			a: "Covalent",
+		},
+		{
+			q: "What is the unit of current?",
+			a: "Ampere",
+		},
+		{
+			q: "What is the pH of a neutral solution?",
+			a: "7",
+		},
+	],
+
+	// Create a list of 10 questions and answers about "How Maslows hiearchy of needs applies to donald trump and his supporters" in strict json format [{q,a}].  Answers should be 3 words or less.
+	oldQA: [
 		{
 			q: "How does Maslow's hierarchy of needs apply to Donald Trump?",
 			a: "Power, esteem, security",
@@ -54,4 +77,26 @@ export default {
 			a: "Less aggressive",
 		},
 	],
+
+	org: {
+		name: `<a href="https://boldleaders.org" target="boldleaders">
+					<img width="100px" src="https://www.boldleaders.org/wp-content/uploads/2019/07/logo-B-Final-C.png"></img>
+				</a>`,
+		programs: [
+			{
+				name: `🧬 Elementals`,
+				courses: [
+					{
+						name: `Resources 101`,
+						menu: [
+							"📚 Study",
+							"🎓 Learn",
+							"⚡ Activities",
+							"💬 Discuss",
+						],
+					},
+				],
+			},
+		],
+	},
 }

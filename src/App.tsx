@@ -1,6 +1,7 @@
 import Listener from "./components/Listener"
 import Waveform from "./components/Waveform.jsx"
 import MenuBar from "./components/MenuBar"
+import SideMenu from "./components/SideMenu"
 import {
 	Alert,
 	Button,
@@ -19,6 +20,8 @@ export default function App() {
 	return (
 		<>
 			<MenuBar />
+			<SideMenu />
+
 			<QCards />
 		</>
 	)
