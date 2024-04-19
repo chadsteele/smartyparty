@@ -1,4 +1,4 @@
-export default {
+const config = {
 	instructions: `You are reporting about a conversation.
 
 	Invent a title,
@@ -79,20 +79,27 @@ export default {
 	],
 
 	org: {
-		name: `<a href="https://boldleaders.org" target="boldleaders">
+		name: "boldleaders",
+		html: `<a href="https://boldleaders.org" target="boldleaders">
 					<img width="100px" src="https://www.boldleaders.org/wp-content/uploads/2019/07/logo-B-Final-C.png"></img>
 				</a>`,
 		programs: [
 			{
-				name: `🧬 Elementals`,
-				courses: [
+				label: `🧬 Elementals`,
+				menu: [
 					{
-						name: `Resources 101`,
+						label: `Resources 101`,
 						menu: [
-							"📚 Study",
-							"🎓 Learn",
-							"⚡ Activities",
-							"💬 Discuss",
+							{ label: "📚 Study", url: "" },
+							{
+								label: "🎓 Learn",
+							},
+							{
+								label: "⚡ Activities",
+							},
+							{
+								label: "💬 Discuss",
+							},
 						],
 					},
 				],
@@ -100,3 +107,5 @@ export default {
 		],
 	},
 }
+
+export default config

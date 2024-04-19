@@ -12,16 +12,60 @@ import {
     ListItem,
     ListItemButton,
     ListItemIcon,
-    ListItemText, Typography, Grow, ListSubheader
+    ListItemText, Typography, Grow, ListSubheader, Container, Slide, Stack, BottomNavigation
 } from "@suid/material";
 import config from "./config.js"
 
 
+{/* courses: [
+					{
+						label: `Resources 101`,
+						menu: [
+							{label:"📚 Study", url:""},
+							{label:"🎓 Learn", menu:[]},
+							{label:"⚡ Activities", menu:[]},
+							{label:"💬 Discuss", menu:[]},
+						],
+					},
+				], */}
+
+
+function Menu (props) {
+    const [show, setShow] = createSignal("")
+    let myDiv
+
+    return <List >
+        <For each={props.menu}>{
+            (item) => <div >
+                <ListItem disablePadding>
+                    <ListItemButton onClick={() => {
+                        if (show().includes(item.label)) {
+                            setShow(show().replaceAll(item.label, ""))
+                        } else {
+                            setShow([show(), item.label].join(" "))
+                        }
+                    }
+                    }>
+                        <ListItemText primary={item.label} />
+                    </ListItemButton>
+                </ListItem>
+                <Show when={show().includes(item.label)}>
+                    <Grow direction="down" in={show().includes(item.label)} timeout={1000}  >
+                        <Container>
+                            <Menu menu={props.menu} />
+                        </Container>
+                    </Grow>
+                </Show>
+            </div>
+        }</For >
+    </List >
+}
+
 
 export default function () {
 
-    const [show, setShow] = createSignal("")
-    const course = config.org.programs[0].courses[0]
+
+    const course = config.org.programs[0].menu[0]
 
     console.log(course.menu)
 
@@ -33,15 +77,21 @@ export default function () {
             <Drawer
                 anchor="left"
                 open={true}
+                sx={{ flexGrow: 1, margin: "1em", display: 'flex', flexDirection: 'column' }}
             >
-                <List>
 
+                <Box sx={{
+                    top: 0,
+                    margin: '1em',
+                    position: 'fixed',
+                    width: 'fit',
+                    height: '1vh'
+                }}>
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, margin: "1em" }}
                     >
-                        {config.org.programs[0].name}
+                        {config.org.programs[0].label}
                     </Typography>
 
                     <Divider />
@@ -49,44 +99,35 @@ export default function () {
                     <Typography
                         component="div"
                         align="right"
-                        sx={{ flexGrow: 1, margin: "1em", fontSize: "1em", color: "grey", fontStyle: "italic" }}
+                        sx={{ fontSize: ".6em", color: "grey", fontStyle: "italic" }}
                     >
-                        {course.name}
+                        {course.label}
                     </Typography>
-
-                    <For each={course.menu}>{
-                        (item) => <div>
-                            <ListItem disablePadding>
-                                <ListItemButton onClick={() => {
-                                    if (show().includes(item)) {
-                                        setShow(show().replaceAll(item, ""))
-                                    } else {
-                                        setShow([show(), item].join(" "))
-                                    }
-                                }
-                                }>
-                                    <ListItemText primary={item} />
-                                </ListItemButton>
-                            </ListItem>
-                            <Show when={show().includes(item)}>
-                                <Grow in={show().includes(item)} ><div>
-                                    <For each={[1, 2, 3, 4]}>{
-                                        (i) => <ListItem disablePadding>
-                                            <ListItemButton sx={{ pl: 4 }}>
-                                                <ListItemText primary={" blah, blah"} />
-                                            </ListItemButton>
-                                        </ListItem>
-
-                                    }</For>
-                                </div>
-                                </Grow>
-                            </Show>
-                        </div>
-                    }</For>
-                </List>
-                <Box sx={{ position: "absolute", bottom: 0, margin: "1em" }}>
-                    <div innerHTML={config.org.name} />
                 </Box>
+
+                <List >
+
+
+
+                    <Box sx={{ height: '2em' }} />
+                    <Menu menu={course.menu} />
+                    <Box sx={{ height: '1em' }} />
+
+                </List>
+
+
+
+                <Box sx={{
+                    bottom: 0,
+                    margin: '1em',
+                    position: 'fixed',
+                    width: '100%'
+                }}>
+                    <Show when={config.org.html} fallback={config.org?.name || "SmartyParty 🎉"}>
+                        <div innerHTML={config.org.html} />
+                    </Show>
+                </Box>
+
             </Drawer>
         </>
 
