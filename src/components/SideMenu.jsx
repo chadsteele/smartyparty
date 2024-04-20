@@ -17,119 +17,52 @@ import {
 import config from "./config.js"
 
 
-{/* courses: [
-					{
-						label: `Resources 101`,
-						menu: [
-							{label:"📚 Study", url:""},
-							{label:"🎓 Learn", menu:[]},
-							{label:"⚡ Activities", menu:[]},
-							{label:"💬 Discuss", menu:[]},
-						],
-					},
-				], */}
-
-
 function Menu (props) {
-    const [show, setShow] = createSignal("")
-    let myDiv
 
-    return <List >
+    return < >
         <For each={props.menu}>{
-            (item) => <div >
-                <ListItem disablePadding>
-                    <ListItemButton onClick={() => {
-                        if (show().includes(item.label)) {
-                            setShow(show().replaceAll(item.label, ""))
-                        } else {
-                            setShow([show(), item.label].join(" "))
-                        }
-                    }
-                    }>
-                        <ListItemText primary={item.label} />
-                    </ListItemButton>
-                </ListItem>
-                <Show when={show().includes(item.label)}>
-                    <Grow direction="down" in={show().includes(item.label)} timeout={1000}  >
-                        <Container>
-                            <Menu menu={props.menu} />
-                        </Container>
+            (item) => {
+                return <div >
+                    <ListItem disablePadding>
+                        <ListItemButton >
+                            <Show when={item.html} fallback={<ListItemText primary={item.label} sx={{ ml: 2 * props.indent }} />}>
+                                <div innerHTML={item.html} />
+                            </Show>
+                        </ListItemButton>
+                    </ListItem>
+
+                    <Grow direction="down" in={item.menu} timeout={1000}  >
+                        <div>
+                            <Menu menu={item.menu} indent={props.indent + 1} />
+                        </div>
                     </Grow>
-                </Show>
-            </div>
-        }</For >
-    </List >
+                </div>
+            }}</For >
+    </ >
 }
 
 
-export default function () {
+export default function (props) {
 
-
-    const course = config.org.programs[0].menu[0]
-
-    console.log(course.menu)
+    const org = props.org || config.org
 
     return (
-
-
         <>
-
-            <Drawer
-                anchor="left"
-                open={true}
-                sx={{ flexGrow: 1, margin: "1em", display: 'flex', flexDirection: 'column' }}
-            >
-
-                <Box sx={{
-                    top: 0,
-                    margin: '1em',
-                    position: 'fixed',
-                    width: 'fit',
-                    height: '1vh'
-                }}>
-                    <Typography
-                        variant="h6"
-                        component="div"
-                    >
-                        {config.org.programs[0].label}
-                    </Typography>
-
-                    <Divider />
-
-                    <Typography
-                        component="div"
-                        align="right"
-                        sx={{ fontSize: ".6em", color: "grey", fontStyle: "italic" }}
-                    >
-                        {course.label}
-                    </Typography>
-                </Box>
-
+            <Drawer anchor="left" open={true}>
                 <List >
-
-
-
-                    <Box sx={{ height: '2em' }} />
-                    <Menu menu={course.menu} />
-                    <Box sx={{ height: '1em' }} />
-
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={
+                            window.open(org.url, org.label)
+                        }>
+                            <Show when={org.html} fallback={<ListItemText primary={org.label} sx={{ ml: 2 * props.indent }} />}>
+                                <div innerHTML={org.html} />
+                            </Show>
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <Menu menu={org.menu} indent={0} />
                 </List>
-
-
-
-                <Box sx={{
-                    bottom: 0,
-                    margin: '1em',
-                    position: 'fixed',
-                    width: '100%'
-                }}>
-                    <Show when={config.org.html} fallback={config.org?.name || "SmartyParty 🎉"}>
-                        <div innerHTML={config.org.html} />
-                    </Show>
-                </Box>
-
-            </Drawer>
+            </Drawer >
         </>
-
     );
 }

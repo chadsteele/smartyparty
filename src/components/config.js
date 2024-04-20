@@ -79,11 +79,10 @@ const config = {
 	],
 
 	org: {
-		name: "boldleaders",
-		html: `<a href="https://boldleaders.org" target="boldleaders">
-					<img width="100px" src="https://www.boldleaders.org/wp-content/uploads/2019/07/logo-B-Final-C.png"></img>
-				</a>`,
-		programs: [
+		label: "boldleaders",
+		html: `<img width="100px" src="https://www.boldleaders.org/wp-content/uploads/2019/07/logo-B-Final-C.png"></img>`,
+		url: "https://boldleaders.org",
+		menu: [
 			{
 				label: `🧬 Elementals`,
 				menu: [
@@ -93,6 +92,19 @@ const config = {
 							{ label: "📚 Study", url: "" },
 							{
 								label: "🎓 Learn",
+								menu: [
+									{ label: "📚 Study", url: "" },
+									{
+										label: "🎓 Learn",
+										menu: [],
+									},
+									{
+										label: "⚡ Activities",
+									},
+									{
+										label: "💬 Discuss",
+									},
+								],
 							},
 							{
 								label: "⚡ Activities",
