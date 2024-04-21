@@ -84,33 +84,49 @@ const config = {
 		url: "https://boldleaders.org",
 		menu: [
 			{
+				opened: true,
 				label: `🧬 Elementals`,
 				menu: [
 					{
+						opened: true,
 						label: `Resources 101`,
 						menu: [
 							{ label: "📚 Study", url: "" },
 							{
 								label: "🎓 Learn",
 								menu: [
-									{ label: "📚 Study", url: "" },
-									{
-										label: "🎓 Learn",
-										menu: [],
-									},
-									{
-										label: "⚡ Activities",
-									},
-									{
-										label: "💬 Discuss",
-									},
+									{ label: "One" },
+									{ label: "Two" },
+									{ label: "Three" },
+									{ label: "Four" },
 								],
 							},
 							{
 								label: "⚡ Activities",
+								menu: [
+									{ label: "Swim" },
+									{ label: "Yoga" },
+									{ label: "Nap" },
+									{ label: "Crap" },
+								],
 							},
 							{
 								label: "💬 Discuss",
+								menu: [
+									{
+										label: "One",
+										opened: true,
+										menu: [
+											{ label: "Swim" },
+											{ label: "Yoga" },
+											{ label: "Nap" },
+											{ label: "Crap" },
+										],
+									},
+									{ label: "Two" },
+									{ label: "Three" },
+									{ label: "Four" },
+								],
 							},
 						],
 					},
