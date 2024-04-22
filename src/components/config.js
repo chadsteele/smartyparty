@@ -95,7 +95,15 @@ const config = {
 							{
 								label: "🎓 Learn",
 								menu: [
-									{ label: "One" },
+									{
+										label: "Solid Collapse automatically calculates the optimal duration according to the content height. You can opt-it by referencing the variable --sc-auto-duration in your transition property:",
+										menu: [
+											{ label: "Swim" },
+											{ label: "Yoga" },
+											{ label: "Nap" },
+											{ label: "Crap" },
+										],
+									},
 									{ label: "Two" },
 									{ label: "Three" },
 									{ label: "Four" },

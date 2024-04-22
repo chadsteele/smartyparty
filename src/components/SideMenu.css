@@ -1,0 +1,19 @@
+.menu {
+    max-width: 40vw;
+    min-width: 20vw;
+}
+
+.limit-label {
+    --lines-to-show: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--lines-to-show);
+}
+
+.open-icon {
+    transition: "transform .55s";
+    position: absolute;
+    right: 2px;
+    top: 2px;
+}

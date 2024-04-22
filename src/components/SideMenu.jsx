@@ -10,6 +10,7 @@ import {
 } from "@suid/material";
 import OpenIcon from "@suid/icons-material/ArrowDropDown"
 import config from "./config.js"
+import "./SideMenu.css"
 
 
 export default function (props) {
@@ -18,7 +19,7 @@ export default function (props) {
     return (
         <>
             <Drawer anchor="left" open={true}>
-                <List >
+                <List class="menu">
                     <Label url={org.url} label={org.label} html={org.html} />
                     <Divider />
                     <Menu menu={org.menu} indent={0} />
@@ -27,6 +28,7 @@ export default function (props) {
         </>
     );
 }
+
 
 
 function Label (props) {
@@ -39,9 +41,12 @@ function Label (props) {
                 toggle()
             }}>
                 <Show when={!html && label} fallback={<div innerHTML={html} />}>
-                    <ListItemText primary={label} sx={{ ml: 2 * indent }} />
+                    <ListItemText primary={label}
+                        class="limit-label"
+                        sx={{ ml: 2 * indent }} />
                     <Show when={menu?.length}>
-                        <OpenIcon style={{ transform: props.opened ? "rotate(180deg)" : "rotate(0deg)" }} />
+                        <OpenIcon class="open-icon"
+                            sx={{ transform: !props.opened ? "rotate(-180deg)" : "rotate(0deg)", }} />
                     </Show>
                 </Show>
             </ListItemButton>
@@ -68,7 +73,7 @@ function MenuItem (props) {
 }
 
 function Menu (props) {
-    return < >
+    return <  >
         <For each={props.menu}>{
             (item) => {
                 return <MenuItem item={item} indent={props.indent} />
