@@ -6,19 +6,21 @@ import {
     List,
     ListItem,
     ListItemButton,
-    ListItemText, Grow
+    ListItemText, Grow, Slide
 } from "@suid/material";
 import OpenIcon from "@suid/icons-material/ArrowDropDown"
 import config from "./config.js"
 import "./SideMenu.css"
 
 
+export const [open, setOpen] = createSignal(true)
+
 export default function (props) {
     const org = props.org || config.org
 
     return (
         <>
-            <Drawer anchor="left" open={true}>
+            <Drawer anchor="left" open={open()} onClose={() => { setOpen(false) }}>
                 <List class="menu">
                     <Label url={org.url} label={org.label} html={org.html} />
                     <Divider />
@@ -32,21 +34,22 @@ export default function (props) {
 
 
 function Label (props) {
-    const { label, url, html, indent, opened, toggle, menu } = props
+    const { label, url, html, indent, toggle, menu } = props
 
     return <>
         <ListItem disablePadding>
             <ListItemButton onClick={() => {
                 url && window.open(url, label)
-                toggle()
-            }}>
+                props.toggle && props.toggle()
+            }} >
                 <Show when={!html && label} fallback={<div innerHTML={html} />}>
                     <ListItemText primary={label}
                         class="limit-label"
-                        sx={{ ml: 2 * indent }} />
+                        sx={{ ml: config.menu.indent * indent, }} />
                     <Show when={menu?.length}>
                         <OpenIcon class="open-icon"
-                            sx={{ transform: !props.opened ? "rotate(-180deg)" : "rotate(0deg)", }} />
+                            // sx={{ transform: `rotate(${!props.opened ? -120 : 0}deg)`, transition: "transform .25s" }} />
+                            sx={{ transform: !props.opened ? "rotate(-90deg)" : "rotate(0deg)", transition: "transform .25s" }} />
                     </Show>
                 </Show>
             </ListItemButton>
@@ -58,16 +61,16 @@ function MenuItem (props) {
     const { item } = props
 
     const [opened, setOpened] = createSignal(item.opened || false)
-    function toggle () { setOpened(!opened()) }
+    const toggle = () => { setOpened(!opened()) }
 
     return <div >
-        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu} opened={opened()} toggle={toggle} />
+        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu} toggle={toggle} opened={opened()} />
         <Show when={item.menu && opened()}>
-            <Grow direction="down" in={item.menu && opened()} timeout={1000}  >
+            <Slide direction="left" in={item.menu && opened()} timeout={1000} >
                 <div>
                     <Menu menu={item.menu} indent={props.indent + 1} />
                 </div>
-            </Grow>
+            </Slide>
         </Show>
     </div>
 }
