@@ -18,8 +18,9 @@ import { Show, createSignal, createEffect } from "solid-js"
 
 export const [alert, setAlert] = createSignal()
 
-export default function () {
+export default function (props) {
 	let count = 0
+	console.log({ MenuBar: props })
 
 	createEffect(() => {
 		if (alert()?.timeout) {
@@ -58,7 +59,7 @@ export default function () {
 
 						<Button color="inherit" startIcon={<ProfileIcon />}
 							onClick={() => {
-								setAlert({ severity: "info", message: "Not implemented yet.  Stay tuned.", timeout: 3000 })
+								setAlert({ severity: "info", message: "Not implemented yet.  You can beta test the app without an account.", timeout: 3000 })
 							}}>
 							{"sign in"}
 						</Button>

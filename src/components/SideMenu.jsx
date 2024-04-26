@@ -11,11 +11,16 @@ import {
 import OpenIcon from "@suid/icons-material/ArrowDropDown"
 import config from "./config.js"
 import "./SideMenu.css"
+// import { useNavigate } from "@solidjs/router"
+
 
 
 export const [open, setOpen] = createSignal(true)
 
 export default function (props) {
+
+    console.log({ SideMenu: props })
+
     const org = props.org || config.org
 
     return (
@@ -34,14 +39,25 @@ export default function (props) {
 
 
 function Label (props) {
-    const { label, url, html, indent, toggle, menu } = props
+
+    const { label, url, path, html, indent, toggle, menu } = props
+
+    //const navigate = useNavigate();
+
 
     return <>
         <ListItem disablePadding>
-            <ListItemButton onClick={() => {
-                url && window.open(url, label)
-                props.toggle && props.toggle()
-            }} >
+            <ListItemButton
+                disabled={!menu?.length && !url && !path}
+                onClick={() => {
+                    url && window.open(url, label)
+                    path && console.log({ path })
+
+                    //path && navigate("./QA/" + path.replace("./", ""))
+
+
+                    props.toggle && props.toggle()
+                }} >
                 <Show when={!html && label} fallback={<div innerHTML={html} />}>
                     <ListItemText primary={label}
                         class="limit-label"
@@ -64,9 +80,9 @@ function MenuItem (props) {
     const toggle = () => { setOpened(!opened()) }
 
     return <div >
-        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu} toggle={toggle} opened={opened()} />
+        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu} toggle={toggle} opened={opened()} url={item.url} path={item.path} />
         <Show when={item.menu && opened()}>
-            <Slide direction="left" in={item.menu && opened()} timeout={1000} >
+            <Slide direction="left" in={item.menu && opened()} timeout={250} >
                 <div>
                     <Menu menu={item.menu} indent={props.indent + 1} />
                 </div>

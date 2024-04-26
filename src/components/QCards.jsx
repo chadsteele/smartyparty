@@ -15,10 +15,17 @@ import {
 } from "@suid/material"
 
 
+
 import "./QCard.css"
 
-export default function (params) {
-    const originalCards = (config.QA).map((item) => { item.correct = 0; return item })
+export default function () {
+    const params = useParams();
+
+    console.log({ config })
+    const originalCards = config.defaults[0].qa.map((item) => { item.correct = 0; return item })
+
+    console.log({ originalCards })
+
     const [cards, setCards] = createSignal(originalCards)
     const [index, setIndex] = createSignal(0)
 
