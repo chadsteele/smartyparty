@@ -1,6 +1,6 @@
 export default [
 	{
-		path: "BoldLeaders/Elementals/Resources101/Learn/Elementals",
+		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals",
 		qa: [
 			{
 				q: "What elemental human resource allows us to perceive the world around us through sight, smell, hearing, taste, and touch?",
@@ -85,7 +85,7 @@ export default [
 		],
 	},
 	{
-		path: "BoldLeaders/Elementals/Resources101/Learn/Compounds",
+		path: "/BoldLeaders/Elementals/Resources101/Learn/Compounds",
 		qa: [
 			{
 				q: "What compound arises from the active engagement with elemental human resources and involves the ability to overcome challenges and setbacks?",

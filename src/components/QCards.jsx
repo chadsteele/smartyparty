@@ -13,21 +13,35 @@ import {
     Typography,
     Stack, IconButton, Slide, Box, Grow, LinearProgress
 } from "@suid/material"
-
+import { useLocation } from "@solidjs/router"
 
 
 import "./QCard.css"
 
-export default function () {
-    const params = useParams();
+export default function (props) {
 
-    console.log({ config })
-    const originalCards = config.defaults[0].qa.map((item) => { item.correct = 0; return item })
-
-    console.log({ originalCards })
-
-    const [cards, setCards] = createSignal(originalCards)
+    const [original, setOriginal] = createSignal([])
+    const [cards, setCards] = createSignal([])
     const [index, setIndex] = createSignal(0)
+
+
+    // update original when url changes
+    createEffect(() => {
+
+        const loc = useLocation();
+        console.log(loc.pathname)
+
+        const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
+        setOriginal(root[0].qa.map((item) => { item.correct = 0; return item }))
+
+    })
+
+    // update cards when original changes
+    createEffect(() => {
+        setCards(original())
+        setIndex(0)
+    })
+
 
     function next () {
         setCards(cards().filter((card) => card.correct < 1))
@@ -42,13 +56,10 @@ export default function () {
     })
 
     return <>
-
-
-
         <Container sx={{ m: 1, textAlign: "right" }}>
             <LinearStatus
-                status={`${originalCards.length - cards().length}/${originalCards.length}`}
-                ratio={100 * (originalCards.length - cards().length) / originalCards.length}
+                status={`${original().length - cards().length}/${original().length}`}
+                ratio={100 * (original().length - cards().length) / original().length}
             />
         </Container>
 

@@ -25,15 +25,11 @@ const config = {
 								menu: [
 									{
 										label: "Elementals",
-										path:
-											"./open/" +
-											"BoldLeaders/Elementals/Resources101/Learn/Elementals",
+										path: "BoldLeaders/Elementals/Resources101/Learn/Elementals",
 									},
 									{
 										label: "Compounds",
-										path:
-											"./open/" +
-											"BoldLeaders/Elementals/Resources101/Learn/Compounds",
+										path: "BoldLeaders/Elementals/Resources101/Learn/Compounds",
 									},
 								],
 							},

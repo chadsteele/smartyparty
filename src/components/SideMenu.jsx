@@ -11,7 +11,7 @@ import {
 import OpenIcon from "@suid/icons-material/ArrowDropDown"
 import config from "./config.js"
 import "./SideMenu.css"
-// import { useNavigate } from "@solidjs/router"
+import { useNavigate } from "@solidjs/router"
 
 
 
@@ -42,7 +42,7 @@ function Label (props) {
 
     const { label, url, path, html, indent, toggle, menu } = props
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     return <>
@@ -53,7 +53,7 @@ function Label (props) {
                     url && window.open(url, label)
                     path && console.log({ path })
 
-                    //path && navigate("./QA/" + path.replace("./", ""))
+                    path && navigate("./" + path.replace("./", ""))
 
 
                     props.toggle && props.toggle()
