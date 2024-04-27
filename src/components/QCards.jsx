@@ -14,6 +14,7 @@ import {
     Stack, IconButton, Slide, Box, Grow, LinearProgress
 } from "@suid/material"
 import { useLocation } from "@solidjs/router"
+import { setOpen } from './SideMenu'
 
 
 import "./QCard.css"
@@ -32,14 +33,19 @@ export default function (props) {
         console.log(loc.pathname)
 
         const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
-        setOriginal(root[0].qa.map((item) => { item.correct = 0; return item }))
+        setOriginal(root[0].qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
 
     })
 
-    // update cards when original changes
-    createEffect(() => {
+    function reset () {
         setCards(original())
         setIndex(0)
+    }
+
+    // update cards when original changes
+    createEffect(() => {
+        original() // trigger
+        reset()
     })
 
 
@@ -61,6 +67,19 @@ export default function (props) {
                 status={`${original().length - cards().length}/${original().length}`}
                 ratio={100 * (original().length - cards().length) / original().length}
             />
+
+            <Show when={cards().length == 0 && original().length > 0}>
+                <Alert severity="success">
+                    <h1>Congratulations!</h1>
+                    You successfully completed this exercise and learned {original().length} new things!
+                    <br></br>
+                    <Stats cards={original()} />
+                    <br></br>
+                    <Button onClick={reset}>retry</Button>
+                    <Button onClick={() => { setOpen(true) }}>menu</Button>
+                </Alert>
+            </Show>
+
 
             <Show when={cards().length}>
                 <Box sx={{ width: "100%", position: "relative" }}>
@@ -88,4 +107,19 @@ function LinearStatus (props) {
         </Box>
 
     </>
+}
+
+function Stats (props) {
+    const { cards } = props
+    if (!cards?.length) return <Alert severity="error">Stats function received an empty list</Alert>
+
+    console.log({ stats: props })
+    const totalMissed = cards?.reduce(function (total, card) { return total + card.missed }, 0)
+    const numMissed = cards?.filter(card => card.missed).length
+    const grade = Math.floor((cards.length - numMissed) / cards.length * 100)
+
+    return <>
+        You got {grade}% of the questions right on the first try, missed {numMissed} and required {totalMissed} total hints
+    </>
+
 }

@@ -15,7 +15,7 @@ import { useNavigate } from "@solidjs/router"
 
 
 
-export const [open, setOpen] = createSignal(true)
+export const [open, setOpen] = createSignal(false)
 
 export default function (props) {
 

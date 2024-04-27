@@ -17,7 +17,7 @@ import "./QCard.css"
 
 export default function (props) {
 
-    if (!props.qa) return <>Missing params!</>
+    if (!props.qa) return <Alert severity="error">Missing params!</Alert>
 
     const [hint, setHint] = createSignal("")
     const [answer, setAnswer] = createSignal("")
@@ -59,6 +59,8 @@ export default function (props) {
 
     function onMiss () {
         props.qa.correct = -2 // miss once, you have to get it right 3x to learn it
+        props.qa.missed = (props.qa.missed + 1) || 1
+
         let temp = props.qa.a
         if (!temp) return
 
