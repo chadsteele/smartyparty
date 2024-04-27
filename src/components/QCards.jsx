@@ -24,6 +24,7 @@ export default function (props) {
     const [original, setOriginal] = createSignal([])
     const [cards, setCards] = createSignal([])
     const [index, setIndex] = createSignal(0)
+    const [title, setTitle] = createSignal("")
 
 
     // update original when url changes
@@ -31,6 +32,8 @@ export default function (props) {
 
         const loc = useLocation();
         console.log(loc.pathname)
+
+        setTitle(loc.pathname.replace("/", "").replaceAll("/", <> &#8226; </>))
 
         const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
         setOriginal(root[0].qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
@@ -63,10 +66,13 @@ export default function (props) {
 
     return <>
         <Container >
-            <LinearStatus
-                status={`${original().length - cards().length}/${original().length}`}
-                ratio={100 * (original().length - cards().length) / original().length}
-            />
+            <h4>{title}</h4>
+            <Show when={cards().length}>
+                <LinearStatus
+                    status={`${original().length - cards().length}/${original().length}`}
+                    ratio={100 * (original().length - cards().length) / original().length}
+                />
+            </Show>
 
             <Show when={cards().length == 0 && original().length > 0}>
                 <Alert severity="success">

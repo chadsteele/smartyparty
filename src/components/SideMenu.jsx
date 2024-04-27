@@ -52,10 +52,7 @@ function Label (props) {
                 onClick={() => {
                     url && window.open(url, label)
                     path && console.log({ path })
-
                     path && navigate("./" + path.replace("./", ""))
-
-
                     props.toggle && props.toggle()
                 }} >
                 <Show when={!html && label} fallback={<div innerHTML={html} />}>
