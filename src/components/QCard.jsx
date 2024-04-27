@@ -104,7 +104,13 @@ export default function (props) {
                 />
                 <Show when={hint() && answer() != props.qa.a} >
                     <Alert severity="error" sx={{ marginTop: '1em' }}>
-                        <Box>Sorry.  You will need to answer this question correctly 3 times now to ensure you've learned it.  Punctuation and capitalization matters.  The Hints improve everytime you hit enter.</Box>
+                        <Box><h2>I'm sorry! </h2>
+                            <ul>
+                                <li>You will need to answer this question correctly 3 times now to ensure you've learned it. </li>
+                                <li>Punctuation and capitalization matters. </li>
+                                <li>The Hints improve everytime you hit enter.</li>
+                            </ul>
+                        </Box>
                         <Box> Hint: &nbsp;  <strong>{hint()}</strong></Box>
                     </Alert>
                 </Show>
