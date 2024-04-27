@@ -56,14 +56,12 @@ export default function (props) {
     })
 
     return <>
-        <Container sx={{ m: 1, textAlign: "right" }}>
+        <Container >
             <LinearStatus
                 status={`${original().length - cards().length}/${original().length}`}
                 ratio={100 * (original().length - cards().length) / original().length}
             />
-        </Container>
 
-        <Container >
             <Show when={cards().length}>
                 <Box sx={{ width: "100%", position: "relative" }}>
                     <For each={cards()} fallback={<div>Loading...</div>}>{(item, i) =>
@@ -79,13 +77,15 @@ export default function (props) {
 
 function LinearStatus (props) {
     return <>
+
         <Show when={props.status != undefined}>
-            <Box sx={{ right: 0, fontStyle: "italic", color: "grey" }}>
+            <Box sx={{ fontStyle: "italic", color: "grey", textAlign: "right" }}>
                 {props.status}
             </Box>
         </Show>
-        <Box >
+        <Box sx={{ marginBottom: "1em" }}>
             <LinearProgress variant="determinate" value={props.ratio} />
         </Box>
+
     </>
 }
