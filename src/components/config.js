@@ -21,11 +21,22 @@ const config = {
 						menu: [
 							{ label: "📚 Study", url: "" },
 							{
+								opened: true,
 								label: "🎓 Learn",
 								menu: [
 									{
+										opened: true,
 										label: "Elementals",
-										path: "BoldLeaders/Elementals/Resources101/Learn/Elementals",
+										menu: [
+											{
+												label: "Part 1",
+												path: "BoldLeaders/Elementals/Resources101/Learn/Elementals/Part1",
+											},
+											{
+												label: "Part 2",
+												path: "BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
+											},
+										],
 									},
 									{
 										label: "Compounds",

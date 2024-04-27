@@ -1,6 +1,6 @@
 export default [
 	{
-		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals",
+		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part1",
 		qa: [
 			{
 				q: "What elemental human resource allows us to perceive the world around us through sight, smell, hearing, taste, and touch?",
@@ -19,6 +19,19 @@ export default [
 				a: "Voice",
 			},
 			{
+				q: "What elemental human resources are involved in perceiving the world, forming emotional bonds, and effective communication?",
+				a: "Senses, Relationship, Communication",
+			},
+			{
+				q: "Name the elemental resources crucial for survival instincts, memory formation, and physical interaction.",
+				a: "Instincts, Memory, Touch",
+			},
+			{
+				q: "Which elemental human resources contribute to experiencing various emotions, observing surroundings, and engaging in cooperative activities?",
+				a: "Emotions, Observation, Cooperation",
+			},
+
+			{
 				q: "Which elemental human resource refers to the connections and bonds we form with others and the world around us?",
 				a: "Relationship",
 			},
@@ -30,6 +43,11 @@ export default [
 				q: "What elemental resource allows us to move our bodies through space and interact with our environment?",
 				a: "Movement",
 			},
+		],
+	},
+	{
+		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
+		qa: [
 			{
 				q: "Which elemental human resource involves the exchange of information and ideas through language, gestures, or other means?",
 				a: "Communication",
@@ -62,18 +80,7 @@ export default [
 				q: "Name an elemental human resource that involves physical contact and connection with others and our environment.",
 				a: "Touch",
 			},
-			{
-				q: "What elemental human resources are involved in perceiving the world, forming emotional bonds, and effective communication?",
-				a: "Senses, Relationship, Communication",
-			},
-			{
-				q: "Name the elemental resources crucial for survival instincts, memory formation, and physical interaction.",
-				a: "Instincts, Memory, Touch",
-			},
-			{
-				q: "Which elemental human resources contribute to experiencing various emotions, observing surroundings, and engaging in cooperative activities?",
-				a: "Emotions, Observation, Cooperation",
-			},
+
 			{
 				q: "What elemental resources are essential for physical movement, sensory perception, and cognitive development?",
 				a: "Movement, Senses, Memory",
