@@ -192,4 +192,9 @@ export default [
 copyright &copy; 2024 <a href="https://boldleaders.org" target="boldleaders">Boldleaders.org</a>
 `,
 	},
+	{
+		path: "/BoldLeaders",
+		title: "Boldleaders",
+		html: `<iframe  src="https://boldleaders.org"/>`,
+	},
 ]

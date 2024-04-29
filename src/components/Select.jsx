@@ -8,6 +8,8 @@ import Steps from './Steps'
 import { setOpen } from './SideMenu'
 import { DisplayText } from './Helpers.jsx'
 
+import './Select.css'
+
 
 export default function (props) {
 
