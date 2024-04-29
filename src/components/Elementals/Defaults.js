@@ -136,4 +136,47 @@ export default [
 			},
 		],
 	},
+	{
+		path: "/BoldLeaders/Elementals/Resources101/Act/RestoringTrust",
+		title: "Restoring Trust Exercise",
+		intro: `
+			Trust is vital for meaningful connections, and it takes authenticity, courage, and humility to restore it when it's shaken.
+
+			In this process, you'll discover the power of being authentic, courageous, and humble. Authenticity means showing up as your true self, being genuine and transparent. Courage empowers you to face challenges and have difficult conversations. Humility reminds you to approach with an open mind and willingness to learn.
+
+			Trust isn't built overnight. It requires time, effort, and commitment to authenticity, courage, and humility. Embrace this journey knowing that the rewards of a deeper connection are worth it.
+
+			With authenticity, courage, and humility, let's begin rebuilding trust together.
+		`,
+		steps: [
+			{
+				step: "Heartfelt Conversation",
+				action: "Have a heartfelt conversation with your partner, actively listening to their concerns without interruption, and expressing empathy and understanding through Communication.",
+			},
+			{
+				step: "Sincere Apology",
+				action: "Offer a sincere apology to your partner, expressing remorse for any past actions or words that have caused hurt, and acknowledging their feelings with Emotions.",
+			},
+			{
+				step: "Honest Disclosure",
+				action: "Engage in honest disclosure by openly sharing your thoughts and feelings with your partner, fostering transparency and trust through Observation.",
+			},
+			{
+				step: "Consistent Support",
+				action: "Show consistent support for your partner throughout the day, actively engaging in activities together and demonstrating your commitment to the relationship with Participation.",
+			},
+			{
+				step: "Empathetic Listening",
+				action: "Practice empathetic listening by attentively listening to your partner's concerns, validating their emotions, and offering comfort and reassurance with Relationship.",
+			},
+			{
+				step: "Forgiveness Exercise",
+				action: "Engage in a forgiveness exercise with your partner, where you both express forgiveness for any past grievances, letting go of resentment and embracing compassion using Emotions.",
+			},
+			{
+				step: "Collaborative Activity",
+				action: "Participate in a collaborative activity together, such as cooking a meal, completing a puzzle, or taking a walk, fostering teamwork and strengthening your bond through Cooperation.",
+			},
+		],
+	},
 ]

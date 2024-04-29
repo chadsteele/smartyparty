@@ -33,7 +33,7 @@ export default function (props) {
         const loc = useLocation();
         console.log(loc.pathname)
 
-        setTitle(loc.pathname.replace("/", "").replaceAll("/", <> &#8226; </>))
+        setTitle(loc.pathname.replaceAll("/", <> / </>))
 
         const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
         setOriginal(root[0].qa.map((item) => { item.correct = 0; item.missed = 0; return item }))

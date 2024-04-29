@@ -46,6 +46,12 @@ const config = {
 							},
 							{
 								label: "⚡ Activities",
+								menu: [
+									{
+										label: "Restoring Trust Exercise",
+										path: "BoldLeaders/Elementals/Resources101/Act/RestoringTrust",
+									},
+								],
 							},
 							{
 								label: "💬 Discuss",
