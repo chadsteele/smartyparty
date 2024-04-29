@@ -42,12 +42,9 @@ export default function (props) {
 
     return <>
         <Container >
-            <h4>{original().title}</h4>
+            <h2><DisplayText text={original().title} /></h2>
             <Box>
-
                 <DisplayText text={original().intro} />
-                {/* {ConvertText(original().intro)} */}
-
             </Box>
 
             <Box sx={{ width: "100%", position: "relative" }}>
@@ -75,8 +72,8 @@ function Step (props) {
     return <Box >
 
 
-        <h4>{props.step.step} </h4>
-        <p onClick={toggleNotes}> {props.step.action}
+        <h4>{props.step.title} </h4>
+        <p onClick={toggleNotes}> {props.step.text}
 
         </p>
         <Show when={notes() || showNotes()} fallback={<Button size="small" onClick={toggleNotes} >✏️ notes</Button>}>

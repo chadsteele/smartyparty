@@ -68,7 +68,7 @@ export default function (props) {
 
 						<Button color="inherit" startIcon={<ProfileIcon />}
 							onClick={() => {
-								setAlert({ severity: "info", message: "Not implemented yet.  You can beta test the app without an account.", timeout: 3000 })
+								setAlert({ severity: "info", message: "Not implemented yet.  You can beta test the app without an account.", timeout: 6000 })
 							}}>
 							{"sign in"}
 						</Button>

@@ -152,32 +152,32 @@ export default [
 		`,
 		steps: [
 			{
-				step: "Heartfelt Conversation",
-				action: "Have a heartfelt conversation with your partner, actively listening to their concerns without interruption, and expressing empathy and understanding through Communication.",
+				title: "Heartfelt Conversation",
+				text: "Have a heartfelt conversation with your partner, actively listening to their concerns without interruption, and expressing empathy and understanding through Communication.",
 			},
 			{
-				step: "Sincere Apology",
-				action: "Offer a sincere apology to your partner, expressing remorse for any past actions or words that have caused hurt, and acknowledging their feelings with Emotions.",
+				title: "Sincere Apology",
+				text: "Offer a sincere apology to your partner, expressing remorse for any past actions or words that have caused hurt, and acknowledging their feelings with Emotions.",
 			},
 			{
-				step: "Honest Disclosure",
-				action: "Engage in honest disclosure by openly sharing your thoughts and feelings with your partner, fostering transparency and trust through Observation.",
+				title: "Honest Disclosure",
+				text: "Engage in honest disclosure by openly sharing your thoughts and feelings with your partner, fostering transparency and trust through Observation.",
 			},
 			{
-				step: "Consistent Support",
-				action: "Show consistent support for your partner throughout the day, actively engaging in activities together and demonstrating your commitment to the relationship with Participation.",
+				title: "Consistent Support",
+				text: "Show consistent support for your partner throughout the day, actively engaging in activities together and demonstrating your commitment to the relationship with Participation.",
 			},
 			{
-				step: "Empathetic Listening",
-				action: "Practice empathetic listening by attentively listening to your partner's concerns, validating their emotions, and offering comfort and reassurance with Relationship.",
+				title: "Empathetic Listening",
+				text: "Practice empathetic listening by attentively listening to your partner's concerns, validating their emotions, and offering comfort and reassurance with Relationship.",
 			},
 			{
-				step: "Forgiveness Exercise",
-				action: "Engage in a forgiveness exercise with your partner, where you both express forgiveness for any past grievances, letting go of resentment and embracing compassion using Emotions.",
+				title: "Forgiveness Exercise",
+				text: "Engage in a forgiveness exercise with your partner, where you both express forgiveness for any past grievances, letting go of resentment and embracing compassion using Emotions.",
 			},
 			{
-				step: "Collaborative Activity",
-				action: "Participate in a collaborative activity together, such as cooking a meal, completing a puzzle, or taking a walk, fostering teamwork and strengthening your bond through Cooperation.",
+				title: "Collaborative Activity",
+				text: "Participate in a collaborative activity together, such as cooking a meal, completing a puzzle, or taking a walk, fostering teamwork and strengthening your bond through Cooperation.",
 			},
 		],
 	},
