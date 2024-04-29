@@ -24,6 +24,8 @@ export default function (props) {
     const [original, setOriginal] = createSignal([])
     const [cards, setCards] = createSignal([])
     const [index, setIndex] = createSignal(0)
+    const [intro, setIntro] = createSignal(false)
+    const [root, setRoot] = createSignal()
 
 
 
@@ -33,14 +35,17 @@ export default function (props) {
         const loc = useLocation();
         console.log(loc.pathname)
 
-        const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
-        setOriginal(root[0].qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
+        const temp = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
+        setRoot(temp[0])
+        setOriginal(root().qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
+        setIntro(!!root().summary)
 
     })
 
     function reset () {
         setCards(original())
         setIndex(0)
+        setIntro(true)
     }
 
     // update cards when original changes
@@ -84,8 +89,19 @@ export default function (props) {
                 </Alert>
             </Show>
 
+            <Show when={intro() && root()?.summary}>
+                <Card>
+                    <CardContent>
+                        <h1>{root()?.title}</h1>
+                        {root()?.summary}
+                        <Button onClick={() => { setIntro(false) }}>continue</Button>
+                    </CardContent>
+                </Card>
 
-            <Show when={cards().length}>
+            </Show>
+
+
+            <Show when={!intro() && cards().length || !root()?.summary}>
                 <Box sx={{ width: "100%", position: "relative" }}>
                     <For each={cards()} fallback={<div>Loading...</div>}>{(item, i) =>
                         <Grow in={i() == index()}>

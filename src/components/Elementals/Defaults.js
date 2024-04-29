@@ -1,6 +1,9 @@
 export default [
 	{
 		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part1",
+		next: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
+		title: "Learn the Elementals - Part 1",
+		summary: `Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!`,
 		qa: [
 			{
 				q: "What elemental human resource allows us to perceive the world around us through sight, smell, hearing, taste, and touch?",
@@ -47,6 +50,9 @@ export default [
 	},
 	{
 		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
+		title: "Learn the Elementals - Part 2",
+		summary: `Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!`,
+
 		qa: [
 			{
 				q: "Which elemental human resource involves the exchange of information and ideas through language, gestures, or other means?",
@@ -189,7 +195,7 @@ export default [
 
 <div class="fusion-column-wrapper fusion-flex-column-wrapper-legacy" style="background-position: left top; background-repeat: no-repeat; background-size: cover; padding: 0px; min-height: 0px;"><style type="text/css"></style><div class="fusion-title title fusion-title-2 fusion-sep-none fusion-title-text fusion-title-size-three fusion-border-below-title" style="margin-top:50px;margin-right:0px;margin-bottom:0px;margin-left:0px;"><h3 class="title-heading-left fusion-responsive-typography-calculated" style="margin:0;--fontSize:30;line-height:1.2;"><span style="color: #0e488a;"><strong>The Elementals:</strong> </span>16 qualities of being human, <em>common to everyone</em>.&nbsp; Yet <strong>everyone</strong> has adapted to not using some of them, resulting in a gap or absence that is missed and notable.&nbsp; Using colorful cards with intriguing language and probing questions, users are drawn to the Elementals they are least familiar with and are encouraged to practice that ‘muscle’.&nbsp; An easy-to-use <strong>Companion Guid</strong>e provides further ideas, discussion questions and worksheets.&nbsp; <span style="color: #0e488a;"><strong>Use of the Elementals ignites actions that build self-agency and deepens essential social and emotional skills.</strong></span></h3></div><style type="text/css"></style><div class="fusion-title title fusion-title-3 fusion-sep-none fusion-title-center fusion-title-text fusion-title-size-three fusion-border-below-title" style="margin-top:15px;margin-right:0px;margin-bottom:31px;margin-left:0px;"><h3 class="title-heading-center fusion-responsive-typography-calculated" style="margin:0;--fontSize:30;line-height:1.5;"><p style="text-align: center;">Curious about how we got to this idea? <a href="https://prezi.com/jvk1tnqxic0h/elemental-human-resources-framework-intro/?token=63010596e2836a5239d981ad1135de1aa62d6b02599749ae4a1b317afe8a6e11&amp;utm_campaign=share&amp;utm_medium=copy" target="_blank" rel="noopener noreferrer"><span style="color: #0000ff;">Check out this short Prezi</span>.</a></p></h3></div><div class="fusion-clearfix"></div></div>
 
-copyright &copy; 2024 <a href="https://boldleaders.org" target="boldleaders">Boldleaders.org</a>
+copyright &copy; 2024 <a href="https://boldleaders.org/elementals" target="boldleaders">Boldleaders.org</a>
 `,
 	},
 	{
