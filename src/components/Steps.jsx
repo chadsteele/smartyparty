@@ -44,7 +44,7 @@ export default function (props) {
         <Container >
             <h2><DisplayText text={original().title} /></h2>
             <Box>
-                <DisplayText text={original().intro} />
+                <DisplayText text={original().summary} />
             </Box>
 
             <Box sx={{ width: "100%", position: "relative" }}>

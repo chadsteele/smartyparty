@@ -1,11 +1,12 @@
 import config from "./config.js"
 import { Show, createSignal, createEffect } from "solid-js"
-import { Alert, Button, Container } from "@suid/material"
+import { Alert, Button, Container, Card, CardContent } from "@suid/material"
 import { useLocation } from "@solidjs/router"
 import QCards from "./QCards"
 import Steps from './Steps'
 
 import { setOpen } from './SideMenu'
+import { DisplayText } from './Helpers.jsx'
 
 
 export default function (props) {
@@ -28,6 +29,16 @@ export default function (props) {
             setComponent(<Steps />)
         } else if (original()?.qa) {
             setComponent(<QCards />)
+        } else if (original()?.html) {
+            setComponent(
+                <Container>
+                    <Card>
+                        <CardContent>
+                            <DisplayText text={original().html} />
+                        </CardContent>
+                    </Card>
+                </Container>
+            )
         } else {
             setComponent(
                 <Container><Alert severity="error">

@@ -16,6 +16,10 @@ const config = {
 				label: `🧬 Elementals`,
 				menu: [
 					{
+						label: "About",
+						path: "BoldLeaders/Elementals",
+					},
+					{
 						opened: true,
 						label: `Resources 101`,
 						menu: [
