@@ -9,18 +9,27 @@ import {
 	Box,
 	Alert,
 	Grow,
+	Breadcrumbs, Link
 } from "@suid/material"
 import ProfileIcon from "@suid/icons-material/Person"
+import { useLocation } from "@solidjs/router"
+
 
 import { setOpen } from "./SideMenu"
 import config from "./config.js"
 import { Show, createSignal, createEffect } from "solid-js"
 
 export const [alert, setAlert] = createSignal()
+export const [path, setPath] = createSignal("")
 
 export default function (props) {
 	let count = 0
 	console.log({ MenuBar: props })
+
+	createEffect(() => {
+		const loc = useLocation()
+		setPath(loc.pathname)
+	})
 
 	createEffect(() => {
 		if (alert()?.timeout) {
@@ -66,7 +75,11 @@ export default function (props) {
 					</Toolbar>
 				</AppBar>
 			</Box>
-			<div style={{ height: "5em" }} />
+
+			<Box sx={{ height: "5em" }} />
+
+			<Path path={path()} />
+
 			<Show when={alert()}>
 				<Grow in={alert()}>
 					<Alert sx={{ margin: "1em" }} severity={alert().severity}>{alert().message}</Alert>
@@ -76,3 +89,38 @@ export default function (props) {
 	)
 }
 
+
+function Path (props) {
+	const [list, setList] = createSignal()
+	const [last, setLast] = createSignal()
+
+	createEffect(() => {
+
+		const loc = props.path
+		const temp = loc.split('/')
+		setLast(temp.pop()) // shortens temp
+		setList(temp)
+	})
+
+
+
+	return <>
+		<Breadcrumbs aria-label="breadcrumb" >
+
+			<For each={list()}>{
+				(folder, i) =>
+					<Link
+						underline="hover"
+						color="inherit"
+						href={[...list()].slice(0, i() + 1).join('/')}
+					>
+						{folder}
+					</Link>
+			}</For>
+
+			<Typography color="text.primary">{last()}</Typography>
+		</Breadcrumbs>
+	</>
+
+
+}

@@ -147,6 +147,8 @@ export default [
 			Trust isn't built overnight. It requires time, effort, and commitment to authenticity, courage, and humility. Embrace this journey knowing that the rewards of a deeper connection are worth it.
 
 			With authenticity, courage, and humility, let's begin rebuilding trust together.
+
+			Be sure and keep notes after each step.  Journal about your thoughts, insights, and questions.  Every thing you share helps me understand and coach you better.
 		`,
 		steps: [
 			{

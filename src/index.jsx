@@ -12,6 +12,5 @@ render(() => <Router root={App} >
     <Route path="/BoldLeaders/Elementals/Resources101/Act/RestoringTrust" component={Steps} />
     <Route path="/*" component={QCards} />
 
-
 </Router>
     , document.getElementById("root"));
