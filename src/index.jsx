@@ -2,15 +2,13 @@
 import { render } from "solid-js/web";
 import App from "./App";
 import { Router, Route } from "@solidjs/router"
-import QCards from './components/QCards'
-import Steps from './components/Steps'
+import Select from './components/Select'
 
 /* BoldLeaders/Elementals/Resources101/Learn/Elementals */
 
 render(() => <Router root={App} >
 
-    <Route path="/BoldLeaders/Elementals/Resources101/Act/RestoringTrust" component={Steps} />
-    <Route path="/*" component={QCards} />
+    <Route path="/*" component={Select} />
 
 </Router>
     , document.getElementById("root"));
