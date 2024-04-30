@@ -16,6 +16,8 @@ import {
 import { useLocation } from "@solidjs/router"
 import { setOpen } from './SideMenu'
 
+import { DisplayText } from './Helpers.jsx'
+
 
 import "./QCard.css"
 
@@ -70,30 +72,19 @@ export default function (props) {
     return <>
         <Container >
 
-            <Show when={cards().length}>
+            <Show when={cards().length < original().length}>
                 <LinearStatus
                     status={`${original().length - cards().length}/${original().length}`}
                     ratio={100 * (original().length - cards().length) / original().length}
                 />
             </Show>
 
-            <Show when={cards().length == 0 && original().length > 0}>
-                <Alert severity="success">
-                    <h1>Congratulations!</h1>
-                    You successfully completed this exercise and learned {original().length} new things!
-                    <br></br>
-                    <Stats cards={original()} />
-                    <br></br>
-                    <Button onClick={reset}>retry</Button>
-                    <Button onClick={() => { setOpen(true) }}>menu</Button>
-                </Alert>
-            </Show>
 
             <Show when={intro() && root()?.summary}>
                 <Card>
                     <CardContent>
-                        <h1>{root()?.title}</h1>
-                        {root()?.summary}
+                        <h1><DisplayText text={root()?.title} /></h1>
+                        <DisplayText text={root()?.summary} />
                         <Button onClick={() => { setIntro(false) }}>continue</Button>
                     </CardContent>
                 </Card>
@@ -110,6 +101,20 @@ export default function (props) {
                     }</For>
                 </Box>
             </Show>
+
+            <Show when={cards().length == 0 && original().length > 0}>
+                <Alert severity="success">
+                    <h1>Congratulations!</h1>
+                    You successfully completed this exercise and learned {original().length} new things!
+                    <br></br>
+                    <Stats cards={original()} />
+                    <br></br>
+                    <Button onClick={reset}>retry</Button>
+                    <Button onClick={() => { setOpen(true) }}>menu</Button>
+                </Alert>
+            </Show>
+
+
         </Container>
     </>
 }

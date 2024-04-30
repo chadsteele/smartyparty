@@ -3,7 +3,9 @@ export default [
 		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part1",
 		next: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
 		title: "Learn the Elementals - Part 1",
-		summary: `Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!`,
+		summary: `
+		<p> Skip to <a href="/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2">part 2</a></p>
+		Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!`,
 		qa: [
 			{
 				q: "What elemental human resource allows us to perceive the world around us through sight, smell, hearing, taste, and touch?",
@@ -51,7 +53,11 @@ export default [
 	{
 		path: "/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part2",
 		title: "Learn the Elementals - Part 2",
-		summary: `Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!`,
+		summary: `
+		<p> Skip to <a href="/BoldLeaders/Elementals/Resources101/Learn/Elementals/Part1">part 1</a></p>
+		Get ready to learn something new in an interactive way! This module will ask you questions and provide hints until you've mastered the answers. The questions are mixed up, so stay on your toes! With each hint, you'll get closer to that 'aha!' moment. Spelling and punctuation count, so be precise. Let's dive in and expand your brain power together - it'll be a fun, bite-sized learning adventure!
+
+		`,
 
 		qa: [
 			{
