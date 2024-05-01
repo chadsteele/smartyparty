@@ -1,4 +1,5 @@
 import Defaults from "./Elementals/Defaults"
+import ai from "./Elementals/Ai.js"
 
 const config = {
 	instructions: ``,
@@ -9,7 +10,7 @@ const config = {
 		html: `<img width="100px" src="https://www.boldleaders.org/wp-content/uploads/2019/07/logo-B-Final-C.png"></img>`,
 		url: "https://boldleaders.org",
 		appname: `🧬 Elementals`,
-		defaults: Defaults,
+		defaults: [...Defaults, ...ai],
 		menu: [
 			{
 				opened: true,

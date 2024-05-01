@@ -23,7 +23,7 @@ export default function (props) {
         const loc = useLocation();
         console.log(loc.pathname)
 
-        const root = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
+        const root = config.org.defaults.filter((item) => item.path.toLowerCase() == loc.pathname.toLowerCase()) || config.org.defaults
         //root[0].steps.map((item) => { item.correct = 0; item.missed = 0; return item })
         setOriginal(root[0])
 

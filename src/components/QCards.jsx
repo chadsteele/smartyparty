@@ -28,6 +28,7 @@ export default function (props) {
     const [index, setIndex] = createSignal(0)
     const [intro, setIntro] = createSignal(false)
     const [root, setRoot] = createSignal()
+    const [correct, setCorrect] = createSignal([])
 
 
 
@@ -37,7 +38,7 @@ export default function (props) {
         const loc = useLocation();
         console.log(loc.pathname)
 
-        const temp = config.org.defaults.filter((item) => item.path == loc.pathname) || config.org.defaults
+        const temp = config.org.defaults.filter((item) => item.path.toLowerCase() == loc.pathname.toLowerCase()) || config.org.defaults
         setRoot(temp[0])
         setOriginal(root().qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
         setIntro(!!root().summary)
@@ -58,11 +59,17 @@ export default function (props) {
 
 
     function next () {
-        setCards(cards().filter((card) => card.correct < 1))
+        // ensure we're working with only 10 questions at a time, so that missed questions will get reviewed sooner than later
+        setCards(original()
+            .filter((card) => card.correct < 1) // remove cards we've learned
+            .sort((a, b) => a.correct - b.correct) // sort to ensure the cards we've missed are in the front of the list
+            .slice(0, 10))  // get the top 10
+
+        console.log({ sorted: cards() })
         const temp = Math.floor(Math.random() * cards().length)
         setIndex(temp)
 
-        console.log({ cards: cards(), index: index() })
+        setCorrect(original().filter((card) => card.correct == 1))
     }
 
     onMount(() => {
@@ -74,8 +81,8 @@ export default function (props) {
 
             <Show when={cards().length < original().length}>
                 <LinearStatus
-                    status={`${original().length - cards().length}/${original().length}`}
-                    ratio={100 * (original().length - cards().length) / original().length}
+                    status={`${correct().length}/${original().length}`}
+                    ratio={100 * correct().length / original().length}
                 />
             </Show>
 
