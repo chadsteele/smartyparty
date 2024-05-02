@@ -105,7 +105,7 @@ function Path (props) {
 
 
 	return <>
-		<Breadcrumbs aria-label="breadcrumb" >
+		<Breadcrumbs aria-label="breadcrumb" sx={{ mb: "2em" }}>
 
 			<For each={list()}>{
 				(folder, i) =>

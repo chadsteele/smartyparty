@@ -67,7 +67,7 @@ export default function (props) {
         if (hint().length >= props.qa.a.length) {
             temp = getHint(temp)
         } else {
-            // replace all letters with underscores
+            // replace all letters with •
             temp = props.qa.a.replaceAll(/\w/g, '•')
         }
         setHint(temp)
@@ -105,6 +105,7 @@ export default function (props) {
                     autoComplete="off"
                 />
                 <Show when={hint() && answer() != props.qa.a} >
+                    <Box> Hint: &nbsp;  <strong>{hint()}</strong></Box>
                     <Alert severity="error" sx={{ marginTop: '1em' }}>
                         <Box><h2>I'm sorry! </h2>
                             <ul>
@@ -113,7 +114,7 @@ export default function (props) {
                                 <li>The Hints improve everytime you hit enter.</li>
                             </ul>
                         </Box>
-                        <Box> Hint: &nbsp;  <strong>{hint()}</strong></Box>
+
                     </Alert>
                 </Show>
 
@@ -147,7 +148,7 @@ function getHint (str, ratio = 1 / 2) {
         replaceable = removeRandomLetter(replaceable)
     }
 
-    const regx = new RegExp(`[${replaceable}]`, 'g')
+    const regx = new RegExp(`[${replaceable}]`, 'ig')
     const temp = str.replaceAll(regx, '•')
 
     console.log({ uniqueCharacters, replaceable, regx, temp })
