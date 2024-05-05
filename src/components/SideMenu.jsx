@@ -1,4 +1,5 @@
 import { Show, createSignal } from "solid-js"
+import theOrg from "../orgs/boldleaders.config.js"
 
 import {
     Divider,
@@ -10,6 +11,7 @@ import {
 } from "@suid/material";
 import OpenIcon from "@suid/icons-material/ArrowDropDown"
 import config from "./config.js"
+
 import "./SideMenu.css"
 import { useNavigate } from "@solidjs/router"
 
@@ -21,13 +23,15 @@ export default function (props) {
 
     console.log({ SideMenu: props })
 
-    const org = props.org || config.org
+    const org = props.org || theOrg
+
+    console.log({ theOrg, org })
 
     return (
         <>
             <Drawer anchor="left" open={open()} onClose={() => { setOpen(false) }}>
                 <List class="menu">
-                    <Label url={org.url} label={org.label} html={org.html} />
+                    <Label url={org.url} label={org.label} html={org.html} enabled={org.menu?.length} />
                     <Divider />
                     <Menu menu={org.menu} indent={0} />
                 </List>
@@ -40,7 +44,7 @@ export default function (props) {
 
 function Label (props) {
 
-    const { label, url, path, html, indent, toggle, menu } = props
+    const { label, url, path, html, indent, toggle, enabled } = props
 
     const navigate = useNavigate();
 
@@ -48,7 +52,7 @@ function Label (props) {
     return <>
         <ListItem disablePadding>
             <ListItemButton
-                disabled={!menu?.length && !url && !path}
+                disabled={!enabled && !url && !path}
                 onClick={() => {
                     url && window.open(url, label)
                     path && console.log({ path })
@@ -59,7 +63,7 @@ function Label (props) {
                     <ListItemText primary={label}
                         class="limit-label"
                         sx={{ ml: config.menu.indent * indent, }} />
-                    <Show when={menu?.length}>
+                    <Show when={enabled}>
                         <OpenIcon class="open-icon"
                             // sx={{ transform: `rotate(${!props.opened ? -120 : 0}deg)`, transition: "transform .25s" }} />
                             sx={{ transform: !props.opened ? "rotate(-90deg)" : "rotate(0deg)", transition: "transform .25s" }} />

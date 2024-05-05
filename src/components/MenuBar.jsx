@@ -1,4 +1,5 @@
 import MenuIcon from "@suid/icons-material/Menu"
+import org from "../orgs/boldleaders.config.js"
 import {
 	AppBar,
 	IconButton,
@@ -16,7 +17,7 @@ import { useLocation } from "@solidjs/router"
 
 
 import { setOpen } from "./SideMenu"
-import config from "./config.js"
+
 import { Show, createSignal, createEffect } from "solid-js"
 
 export const [alert, setAlert] = createSignal()
@@ -63,7 +64,7 @@ export default function (props) {
 							component="div"
 							sx={{ flexGrow: 1 }}
 						>
-							{config.org.appname}
+							{org.appname}
 						</Typography>
 
 						<Button color="inherit" startIcon={<ProfileIcon />}

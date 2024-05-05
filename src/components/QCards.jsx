@@ -1,5 +1,6 @@
 import QCard from "./QCard.jsx"
 import config from "./config.js"
+import org from "../orgs/boldleaders.config.js"
 import { createStore } from "solid-js/store";
 import { Show, createSignal, onMount, createEffect } from "solid-js"
 import {
@@ -17,7 +18,7 @@ import { useLocation } from "@solidjs/router"
 import { setOpen } from './SideMenu'
 
 import { DisplayText } from './Helpers.jsx'
-
+import { getRoot } from './Select.jsx'
 
 import "./QCard.css"
 
@@ -34,12 +35,7 @@ export default function (props) {
 
     // update original when url changes
     createEffect(() => {
-
-        const loc = useLocation();
-        console.log(loc.pathname)
-
-        const temp = config.org.defaults.filter((item) => item.path.toLowerCase() == loc.pathname.toLowerCase()) || config.org.defaults
-        setRoot(temp[0])
+        setRoot(getRoot()[0])
         setOriginal(root().qa.map((item) => { item.correct = 0; item.missed = 0; return item }))
         setIntro(!!root().summary)
 

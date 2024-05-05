@@ -1,4 +1,6 @@
 import config from "./config.js"
+import org from "../orgs/boldleaders.config.js"
+import ai from '../orgs/ai.config.js'
 import { Show, createSignal, createEffect } from "solid-js"
 import { Alert, Button, Container, Card, CardContent } from "@suid/material"
 import { useLocation } from "@solidjs/router"
@@ -11,6 +13,15 @@ import { DisplayText } from './Helpers.jsx'
 import './Select.css'
 
 
+export function getRoot () {
+    const loc = useLocation();
+    console.log(loc.pathname)
+
+    const paths = [...org.paths, ...ai.paths]
+    const root = paths.filter((item) => item.path.toLowerCase() == loc.pathname.toLowerCase()) || paths
+    return root
+}
+
 export default function (props) {
 
     const [original, setOriginal] = createSignal({})
@@ -20,12 +31,7 @@ export default function (props) {
     // update original when url changes
     createEffect(() => {
 
-        const loc = useLocation();
-        console.log(loc.pathname)
-
-        const root = config.org.defaults.filter((item) => item.path.toLowerCase() == loc.pathname.toLowerCase()) || config.org.defaults
-        //root[0].steps.map((item) => { item.correct = 0; item.missed = 0; return item })
-        setOriginal(root[0])
+        setOriginal(getRoot()[0])
 
         if (original()?.steps) {
             setComponent(<Steps />)
