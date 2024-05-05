@@ -31,7 +31,7 @@ export default function (props) {
         <>
             <Drawer anchor="left" open={open()} onClose={() => { setOpen(false) }}>
                 <List class="menu">
-                    <Label url={org.url} label={org.label} html={org.html} enabled={org.menu?.length} />
+                    <Label url={org.url} label={org.label} html={org.html} enabled={!!org.url || org.menu.length} />
                     <Divider />
                     <Menu menu={org.menu} indent={0} />
                 </List>
@@ -57,7 +57,7 @@ function Label (props) {
                     url && window.open(url, label)
                     path && console.log({ path })
                     path && navigate("./" + path.replace("./", ""))
-                    props.toggle && props.toggle()
+                    toggle && toggle()
                 }} >
                 <Show when={!html && label} fallback={<div innerHTML={html} />}>
                     <ListItemText primary={label}
@@ -81,10 +81,13 @@ function MenuItem (props) {
     const toggle = () => { setOpened(!opened()) }
 
     return <div >
-        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu} toggle={toggle} opened={opened()} url={item.url} path={item.path} />
-        <Show when={item.menu && opened()}>
+        <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu}
+            toggle={toggle} opened={opened()} url={item.url} path={item.path}
+            enabled={!!item.url || item.menu?.length}
+        />
+        <Show when={item.menu?.length && opened()}>
             <Slide direction="left" in={item.menu && opened()} timeout={250} >
-                <div>
+                <div note="required by Slide">
                     <Menu menu={item.menu} indent={props.indent + 1} />
                 </div>
             </Slide>
@@ -93,10 +96,9 @@ function MenuItem (props) {
 }
 
 function Menu (props) {
-    return <  >
+    return <>
         <For each={props.menu}>{
-            (item) => {
-                return <MenuItem item={item} indent={props.indent} />
-            }}</For >
+            (item) => <MenuItem item={item} indent={props.indent} />
+        }</For >
     </ >
 }
