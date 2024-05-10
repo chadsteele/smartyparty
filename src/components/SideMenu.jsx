@@ -1,4 +1,5 @@
-import { Show, createSignal } from "solid-js"
+import { Show, createSignal, } from "solid-js"
+import { createStore } from "solid-js/store";
 import theOrg from "../orgs/boldleaders.config.js"
 
 import {
@@ -18,22 +19,22 @@ import { useNavigate } from "@solidjs/router"
 
 
 export const [open, setOpen] = createSignal(false)
+export const [org, setOrg] = createSignal({})
 
 export default function (props) {
 
     console.log({ SideMenu: props })
+    setOrg(props.org || theOrg)
 
-    const org = props.org || theOrg
-
-    console.log({ theOrg, org })
+    console.log({ org: org() })
 
     return (
         <>
             <Drawer anchor="left" open={open()} onClose={() => { setOpen(false) }}>
                 <List class="menu">
-                    <Label url={org.url} label={org.label} html={org.html} enabled={!!org.url || org.menu.length} />
+                    <Label url={org().url} label={org().label} html={org().html} enabled={!!org().url || org().menu.length} />
                     <Divider />
-                    <Menu menu={org.menu} indent={0} />
+                    <Menu menu={org().menu} indent={0} />
                 </List>
             </Drawer >
         </>
@@ -77,28 +78,43 @@ function Label (props) {
 function MenuItem (props) {
     const { item } = props
 
-    const [opened, setOpened] = createSignal(item.opened || false)
-    const toggle = () => { setOpened(!opened()) }
+    function findNode (label, node) {
+        console.log({ findNode: label, node })
+        if (node.label == label) return node
+        if (node?.menu) for (let item of node.menu) {
+            const found = findNode(label, item)
+            if (found) return found
+            if (item.menu) return findNode(label, item.menu)
+        }
+        return null
+    }
+
+    const toggle = () => {
+        let temp = org()
+        setOrg({})
+
+        const menuItem = findNode(item.label, temp)
+        if (menuItem) menuItem.opened = !!!menuItem.opened
+        setOrg(temp)
+    }
 
     return <div >
         <Label html={item.html} label={item.label} indent={props.indent} menu={item.menu}
-            toggle={toggle} opened={opened()} url={item.url} path={item.path}
+            toggle={toggle} opened={item.opened} url={item.url} path={item.path}
             enabled={!!item.url || item.menu?.length}
         />
-        <Show when={item.menu?.length && opened()}>
-            <Slide direction="left" in={item.menu && opened()} timeout={250} >
-                <div note="required by Slide">
-                    <Menu menu={item.menu} indent={props.indent + 1} />
-                </div>
-            </Slide>
+        <Show when={item.menu?.length && item.opened}>
+            {/* <Slide direction="left" in={item.menu && item.opened} timeout={250} > */}
+            <Menu menu={item.menu} indent={props.indent + 1} />
+            {/* </Slide> */}
         </Show>
     </div>
 }
 
 function Menu (props) {
-    return <>
+    return <div>
         <For each={props.menu}>{
             (item) => <MenuItem item={item} indent={props.indent} />
         }</For >
-    </ >
+    </div >
 }
